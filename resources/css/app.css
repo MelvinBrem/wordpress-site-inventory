@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: "Roboto", sans-serif;
+
+    --color-primary: #eeeeee;
+    --color-danger: #c62b2e;
+    --color-info: #2b90c6;
+    --color-confirm: #3fba62;
+}
+
+.badge-primary {
+    @apply bg-primary py-1 px-2 rounded-full;
+}
