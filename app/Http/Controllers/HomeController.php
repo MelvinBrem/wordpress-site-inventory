@@ -19,7 +19,7 @@ class HomeController extends Controller
         $contacts = Contact::latest()->take(5)->get();
         $hosting_providers = HostingProvider::latest()->take(5)->get();
 
-        return view('home', [
+        return view('pages.home', [
             'sites'             => $sites,
             'contacts'          => $contacts,
             'hosting_providers' => $hosting_providers

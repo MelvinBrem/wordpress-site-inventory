@@ -29,7 +29,7 @@ class SiteFactory extends Factory
             'product_owner_contact_id'      => Contact::factory()->ofType(ContactType::ProductOwner),
             'label'                         => fake()->company(),
             'url'                           => 'https://' . fake()->domainName(),
-            'notes'                         => fake()->sentence(),
+            'notes'                         => fake()->paragraph(),
         ];
     }
 

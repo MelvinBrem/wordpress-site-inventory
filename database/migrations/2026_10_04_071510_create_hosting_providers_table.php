@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('contact_id')->nullable()->constrained();
             $table->string('label');
-            $table->string('url');
+            $table->string('url')->nullable();
             $table->timestamps();
         });
     }

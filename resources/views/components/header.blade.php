@@ -16,3 +16,11 @@
         </div>
     </div>
 </header>
+
+@if (session('message'))
+    <section class="section">
+        <div class="container mx-auto p-4 bg-sand border-3d border-umber my-4">
+            {{ session('message') }}
+        </div>
+    </section>
+@endif

@@ -17,7 +17,11 @@ class SiteController extends Controller
      */
     public function index()
     {
-        // Return all sites
+        $sites = Site::latest()->get();
+
+        return view('pages.site-archive', [
+            'sites' => $sites
+        ]);
     }
 
     /**
@@ -25,16 +29,16 @@ class SiteController extends Controller
      */
     public function create()
     {
-        $hosting_providers = HostingProvider::all();
-        $developer_contacts = Contact::ofType(ContactType::Developer)->get();
-        $project_manager_contacts = Contact::ofType(ContactType::ProjectManager)->get();
-        $product_owner_contacts = Contact::ofType(ContactType::ProductOwner)->get();
+        $hosting_providers          = HostingProvider::all();
+        $developer_contacts         = Contact::ofType(ContactType::Developer)->get();
+        $project_manager_contacts   = Contact::ofType(ContactType::ProjectManager)->get();
+        $product_owner_contacts     = Contact::ofType(ContactType::ProductOwner)->get();
 
-        return view('create-site', [
-            'hosting_providers' => $hosting_providers,
-            'developer_contacts' => $developer_contacts,
-            'project_manager_contacts' => $project_manager_contacts,
-            'product_owner_contacts' => $product_owner_contacts
+        return view('pages.site-create', [
+            'hosting_providers'         => $hosting_providers,
+            'developer_contacts'        => $developer_contacts,
+            'project_manager_contacts'  => $project_manager_contacts,
+            'product_owner_contacts'    => $product_owner_contacts
         ]);
     }
 
@@ -43,11 +47,10 @@ class SiteController extends Controller
      */
     public function store(Request $request)
     {
-        Log::info('SiteController@store', $request->all());
-
         $validated = $request->validate([
             'label'                         => 'required|string|max:255',
             'url'                           => 'required|url',
+            'notes'                         => 'nullable|string',
             'hosting_provider_id'           => 'required|exists:hosting_providers,id',
             'developer_contact_id'          => 'required|exists:contacts,id',
             'project_manager_contact_id'    => 'required|exists:contacts,id',
@@ -57,13 +60,14 @@ class SiteController extends Controller
         Site::create([
             'label'                         => $validated['label'],
             'url'                           => $validated['url'],
+            'notes'                         => $validated['notes'],
             'hosting_provider_id'           => $validated['hosting_provider_id'],
             'developer_contact_id'          => $validated['developer_contact_id'],
             'project_manager_contact_id'    => $validated['project_manager_contact_id'],
             'product_owner_contact_id'      => $validated['product_owner_contact_id'],
         ]);
 
-        return redirect('/')->with('success', 'Site aangemaakt');
+        return redirect('/sites')->with('message', 'Site aangemaakt');
     }
 
     /**

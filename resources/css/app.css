@@ -32,6 +32,10 @@ a {
     @apply underline;
 }
 
+a:hover {
+    @apply no-underline;
+}
+
 h1,
 h2,
 h3,
@@ -74,8 +78,9 @@ form {
 }
 
 input,
-select {
-    @apply bg-silver p-1;
+select,
+textarea {
+    @apply bg-silver p-1 w-full min-w-0;
 }
 
 input::placeholder {

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HostingProvider;
+
 use Illuminate\Http\Request;
 
 class HostingProviderController extends Controller
@@ -11,7 +13,11 @@ class HostingProviderController extends Controller
      */
     public function index()
     {
-        //
+        $hosting_providers = HostingProvider::with('contact')->get();
+
+        return view('pages.hosting-provider-archive', [
+            'hosting_providers' => $hosting_providers,
+        ]);
     }
 
     /**
