@@ -13,7 +13,7 @@
     @endif
 </head>
 
-<body class="bg-primary text-black">
+<body class="bg-silver text-ink">
     @include('components.header')
 
     @yield('content')

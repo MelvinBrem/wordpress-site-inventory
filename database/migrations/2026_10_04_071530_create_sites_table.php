@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('product_owner_contact_id')->nullable()->constrained('contacts');
             $table->string('label');
             $table->string('url');
-            $table->longText('notes');
+            $table->longText('notes')->nullable();
             $table->timestamps();
         });
     }

@@ -28,7 +28,7 @@ class SiteFactory extends Factory
             'project_manager_contact_id'    => Contact::factory()->ofType(ContactType::ProjectManager),
             'product_owner_contact_id'      => Contact::factory()->ofType(ContactType::ProductOwner),
             'label'                         => fake()->company(),
-            'url'                           => fake()->domainName(),
+            'url'                           => 'https://' . fake()->domainName(),
             'notes'                         => fake()->sentence(),
         ];
     }

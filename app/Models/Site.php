@@ -17,6 +17,10 @@ class Site extends Model
         'label',
         'url',
         'notes',
+        'hosting_provider_id',
+        'developer_contact_id',
+        'project_manager_contact_id',
+        'product_owner_contact_id',
     ];
 
     public function hostingProvider(): BelongsTo

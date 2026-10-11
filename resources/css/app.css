@@ -6,14 +6,122 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: "Roboto", sans-serif;
+    --font-sans: "Verdana", sans-serif;
 
-    --color-primary: #eeeeee;
-    --color-danger: #c62b2e;
-    --color-info: #2b90c6;
-    --color-confirm: #3fba62;
+    --color-ink: #191d1e;
+    --color-slate: #3f4550;
+    --color-stone: #70787a;
+    --color-silver: #c0bfc0;
+    --color-paper: #eae5e2;
+    --color-sand: #baaa91;
+    --color-bronze: #877459;
+    --color-umber: #534b3a;
+
+    --text-3xl: 2rem;
+    --text-2xl: 1.5rem;
+    --text-xl: 1.25rem;
+    --text-lg: 1.125rem;
+    --text-base: 1rem;
+    --text-sm: 0.875rem;
+    --text-xs: 0.75rem;
 }
 
-.badge-primary {
-    @apply bg-primary py-1 px-2 rounded-full;
+/* Typography */
+
+a {
+    @apply underline;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    @apply font-bold;
+}
+
+.h1 {
+    @apply text-3xl font-bold;
+}
+
+.h2 {
+    @apply text-2xl font-bold;
+}
+
+.h3 {
+    @apply text-xl font-bold;
+}
+
+.h4 {
+    @apply text-lg font-bold;
+}
+
+.h5 {
+    @apply text-base font-bold;
+}
+
+.h6 {
+    @apply text-sm font-bold;
+}
+
+.p {
+    @apply text-base;
+}
+
+form {
+    @apply text-sm flex flex-col gap-2;
+}
+
+input,
+select {
+    @apply bg-silver p-1;
+}
+
+input::placeholder {
+    @apply text-ink/50;
+}
+
+/* Components */
+
+table {
+    @apply w-full border-collapse text-left text-sm;
+}
+
+table thead th {
+    @apply bg-stone text-paper p-2 text-left;
+}
+
+table td {
+    @apply p-2 text-left;
+}
+
+table > *:not(thead) > tr:nth-child(even) {
+    @apply bg-paper;
+}
+
+table > *:not(thead) > tr:nth-child(odd) {
+    @apply bg-silver;
+}
+
+/* Custom classes */
+
+.badge {
+    @apply p-1  border-1 border-silver/20;
+}
+
+.badge--primary {
+    @apply bg-silver border-ink/20;
+}
+
+.badge--secondary {
+    @apply bg-sand text-ink border-bronze/50 text-umber;
+}
+
+.button {
+    @apply w-fit transition-all border-1 border-b-4 border-r-4 border-umber/50 duration-100 bg-sand py-1 px-2 inline-block text-ink hover:text-paper hover:bg-bronze hover:cursor-pointer active:bg-umber active:text-paper;
+}
+
+.border-3d {
+    @apply border-1 border-b-4 border-r-4;
 }

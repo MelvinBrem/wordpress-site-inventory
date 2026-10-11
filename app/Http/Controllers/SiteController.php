@@ -17,11 +17,7 @@ class SiteController extends Controller
      */
     public function index()
     {
-        $sites = Site::all();
-
-        return view('home', [
-            'sites' => $sites,
-        ]);
+        // Return all sites
     }
 
     /**
@@ -64,10 +60,10 @@ class SiteController extends Controller
             'hosting_provider_id'           => $validated['hosting_provider_id'],
             'developer_contact_id'          => $validated['developer_contact_id'],
             'project_manager_contact_id'    => $validated['project_manager_contact_id'],
-            'producT_owner_contact_id'      => $validated['product_owner_contact_id'],
+            'product_owner_contact_id'      => $validated['product_owner_contact_id'],
         ]);
 
-        return redirect('/') > with('success', 'Site aangemaakt');
+        return redirect('/')->with('success', 'Site aangemaakt');
     }
 
     /**

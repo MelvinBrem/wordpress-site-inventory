@@ -24,9 +24,8 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('root')
         ]);
 
-        Site::factory()->create();
-        Site::factory()->create();
-        Site::factory()->create();
-        Site::factory()->create();
+        for ($i = 0; $i < 10; $i++) {
+            Site::factory()->create();
+        }
     }
 }
