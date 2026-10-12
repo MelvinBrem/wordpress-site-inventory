@@ -20,4 +20,5 @@ Route::post('/create-contact', [ContactController::class, 'store']);
 Route::get('/create-contact', [ContactController::class, 'create']);
 
 Route::get('/hosting-providers', [HostingProviderController::class, 'index']);
-Route::get('/tags', [TagController::class, 'index']);
+Route::post('/create-hosting-provider', [HostingProviderController::class, 'store']);
+Route::get('/create-hosting-provider', [HostingProviderController::class, 'create']);

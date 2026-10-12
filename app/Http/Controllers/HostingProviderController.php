@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use App\Models\HostingProvider;
 
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class HostingProviderController extends Controller
      */
     public function index()
     {
-        $hosting_providers = HostingProvider::with('contact')->get();
+        $hosting_providers = HostingProvider::with('contact')->latest()->get();
 
         return view('pages.hosting-provider-archive', [
             'hosting_providers' => $hosting_providers,
@@ -25,7 +26,11 @@ class HostingProviderController extends Controller
      */
     public function create()
     {
-        //
+        $contacts = Contact::orderBy('name')->get();
+
+        return view('pages.hosting-provider-create', [
+            'contacts' => $contacts,
+        ]);
     }
 
     /**
@@ -33,7 +38,19 @@ class HostingProviderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'label' => 'required|string|max:255',
+            'url' => 'nullable|string|max:255',
+            'contact_id' => 'nullable|exists:contacts,id',
+        ]);
+
+        HostingProvider::create([
+            'label' => $validated['label'],
+            'url' => $validated['url'] ?? null,
+            'contact_id' => $validated['contact_id'] ?? null,
+        ]);
+
+        return redirect('/hosting-providers')->with('message', 'Hosting provider aangemaakt');
     }
 
     /**

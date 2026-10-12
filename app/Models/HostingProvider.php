@@ -13,6 +13,7 @@ class HostingProvider extends Model
     use HasFactory;
 
     protected $fillable = [
+        'contact_id',
         'label',
         'url',
     ];
