@@ -8,7 +8,7 @@
     </div>
 @endif
 
-<form method="POST" action="/create-contact">
+<form method="POST" action="/contacts/create">
     @csrf
     <div class="grid grid-cols-[max-content_minmax(0,1fr)] gap-2 items-center">
         <label for="name">Name<span class="text-bronze">*</span></label>
@@ -27,7 +27,7 @@
         <label for="company_name">Company Name<span class="text-bronze">*</span></label>
         <input type="text" id="company_name" name="company_name" placeholder="Lorem Ipsum" maxlength="255">
 
-        <label for="types">Types<span class="text-bronze">*</span></label>
+        <label for="types">Type(s)<span class="text-bronze">*</span></label>
         <select id="types" name="types[]" multiple>
             @foreach (\App\Enums\ContactType::cases() as $type)
                 <option value="{{ $type->value }}" @selected(in_array($type->value, old('types', []), true))>

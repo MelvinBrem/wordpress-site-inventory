@@ -8,7 +8,7 @@
     </div>
 @endif
 
-<form method="POST" action="/create-hosting-provider">
+<form method="POST" action="/hosting-providers/create">
     @csrf
     <div class="grid grid-cols-[max-content_minmax(0,1fr)] gap-2 items-center">
         <label for="label">Label<span class="text-bronze">*</span></label>

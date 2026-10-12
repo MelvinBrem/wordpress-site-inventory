@@ -6,9 +6,9 @@ use App\Enums\ContactType;
 use App\Models\Site;
 use App\Models\HostingProvider;
 use App\Models\Contact;
+use App\Models\Tag;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class SiteController extends Controller
 {
@@ -19,7 +19,7 @@ class SiteController extends Controller
     {
         $sites = Site::latest()->get();
 
-        return view('pages.site-archive', [
+        return view('pages.site.archive', [
             'sites' => $sites
         ]);
     }
@@ -33,12 +33,14 @@ class SiteController extends Controller
         $developer_contacts         = Contact::ofType(ContactType::Developer)->get();
         $project_manager_contacts   = Contact::ofType(ContactType::ProjectManager)->get();
         $product_owner_contacts     = Contact::ofType(ContactType::ProductOwner)->get();
+        $tags                       = Tag::all();
 
-        return view('pages.site-create', [
+        return view('pages.site.create', [
             'hosting_providers'         => $hosting_providers,
             'developer_contacts'        => $developer_contacts,
             'project_manager_contacts'  => $project_manager_contacts,
-            'product_owner_contacts'    => $product_owner_contacts
+            'product_owner_contacts'    => $product_owner_contacts,
+            'tags'                      => $tags
         ]);
     }
 
@@ -47,17 +49,35 @@ class SiteController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'label'                         => 'required|string|max:255',
-            'url'                           => 'required|url',
-            'notes'                         => 'nullable|string',
-            'hosting_provider_id'           => 'required|exists:hosting_providers,id',
-            'developer_contact_id'          => 'required|exists:contacts,id',
-            'project_manager_contact_id'    => 'required|exists:contacts,id',
-            'product_owner_contact_id'      => 'required|exists:contacts,id',
-        ]);
+        $validated = $request->validate(
+            [
+                'label'                         => 'required|string|max:255',
+                'url'                           => 'required|url',
+                'notes'                         => 'nullable|string',
+                'hosting_provider_id'           => 'required|exists:hosting_providers,id',
+                'developer_contact_id'          => 'required|exists:contacts,id',
+                'project_manager_contact_id'    => 'required|exists:contacts,id',
+                'product_owner_contact_id'      => 'required|exists:contacts,id',
+                'tags'                          => 'nullable|array',
+                'tags.*'                        => 'integer|exists:tags,id'
+            ],
+            [
+                'label.required'                        => 'De site moet een naam hebben.',
+                'url.required'                          => 'De site moet een URL hebben.',
+                'url.url'                               => 'De URL moet een geldige URL zijn.',
+                'hosting_provider_id.required'          => 'De site moet een hosting provider hebben.',
+                'hosting_provider_id.exists'            => 'De hosting provider bestaat niet.',
+                'developer_contact_id.required'         => 'De site moet een Developer hebben.',
+                'developer_contact_id.exists'           => 'De Developer bestaat niet.',
+                'project_manager_contact_id.required'   => 'De site moet een Projectmanager hebben.',
+                'project_manager_contact_id.exists'     => 'De Projectmanager bestaat niet.',
+                'product_owner_contact_id.required'     => 'De site moet een Product owner hebben.',
+                'product_owner_contact_id.exists'       => 'De Product owner bestaat niet.',
+                'tags.*.exists'                         => 'Één of meerdere van de geselecteerde tags bestaat niet (meer).'
+            ]
+        );
 
-        Site::create([
+        $site = Site::create([
             'label'                         => $validated['label'],
             'url'                           => $validated['url'],
             'notes'                         => $validated['notes'],
@@ -66,6 +86,8 @@ class SiteController extends Controller
             'project_manager_contact_id'    => $validated['project_manager_contact_id'],
             'product_owner_contact_id'      => $validated['product_owner_contact_id'],
         ]);
+
+        $site->tags()->attach($validated['tags'] ?? []);
 
         return redirect('/sites')->with('message', 'Site aangemaakt');
     }
@@ -81,17 +103,61 @@ class SiteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Site $site)
     {
-        //
+        $hosting_providers          = HostingProvider::all();
+        $developer_contacts         = Contact::ofType(ContactType::Developer)->get();
+        $project_manager_contacts   = Contact::ofType(ContactType::ProjectManager)->get();
+        $product_owner_contacts     = Contact::ofType(ContactType::ProductOwner)->get();
+        $tags                       = Tag::all();
+
+        return view('pages.site.edit', [
+            'site'                      => $site,
+            'hosting_providers'         => $hosting_providers,
+            'developer_contacts'        => $developer_contacts,
+            'project_manager_contacts'  => $project_manager_contacts,
+            'product_owner_contacts'    => $product_owner_contacts,
+            'tags'                      => $tags
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Site $site)
     {
-        //
+        $validated = $request->validate(
+            [
+                'label'                         => 'required|string|max:255',
+                'url'                           => 'required|url',
+                'notes'                         => 'nullable|string',
+                'hosting_provider_id'           => 'required|exists:hosting_providers,id',
+                'developer_contact_id'          => 'required|exists:contacts,id',
+                'project_manager_contact_id'    => 'required|exists:contacts,id',
+                'product_owner_contact_id'      => 'required|exists:contacts,id',
+                'tags'                          => 'nullable|array',
+                'tags.*'                        => 'integer|exists:tags,id'
+            ],
+            [
+                'label.required'                        => 'De site moet een naam hebben.',
+                'url.required'                          => 'De site moet een URL hebben.',
+                'url.url'                               => 'De URL moet een geldige URL zijn.',
+                'hosting_provider_id.required'          => 'De site moet een hosting provider hebben.',
+                'hosting_provider_id.exists'            => 'De hosting provider bestaat niet.',
+                'developer_contact_id.required'         => 'De site moet een Developer hebben.',
+                'developer_contact_id.exists'           => 'De Developer bestaat niet.',
+                'project_manager_contact_id.required'   => 'De site moet een Projectmanager hebben.',
+                'project_manager_contact_id.exists'     => 'De Projectmanager bestaat niet.',
+                'product_owner_contact_id.required'     => 'De site moet een Product owner hebben.',
+                'product_owner_contact_id.exists'       => 'De Product owner bestaat niet.',
+                'tags.*.exists'                         => 'Één of meerdere van de geselecteerde tags bestaat niet (meer).'
+            ]
+        );
+
+        $site->update($validated);
+        $site->tags()->sync($validated['tags'] ?? []);
+
+        return redirect('/sites/' . $site->id . '/edit')->with('message', 'Site aangepast');
     }
 
     /**

@@ -9,7 +9,7 @@
             <div class="col-span-1 bg-paper border-3d border-stone p-4">
                 <h2 class="h3 mb-4">Laatst toegevoegde sites</h2>
 
-                @include('components.table-sites', [
+                @include('components.tables.table-sites', [
                     'preview' => 'true',
                 ])
             </div>
@@ -17,7 +17,7 @@
             <div class="col-span-1 bg-paper border-3d border-stone p-4">
                 <h2 class="h3 mb-4">Laatst toegevoegde contactpersonen</h2>
 
-                @include('components.table-contacts', [
+                @include('components.tables.table-contacts', [
                     'preview' => 'true',
                 ])
             </div>

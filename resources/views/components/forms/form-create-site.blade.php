@@ -8,7 +8,7 @@
     </div>
 @endif
 
-<form method="POST" action="/create-site">
+<form method="POST" action="/sites/create">
     @csrf
     <div class="grid grid-cols-[max-content_minmax(0,1fr)] gap-2 items-center">
         <label for="label">Label<span class="text-bronze">*</span></label>
@@ -19,8 +19,7 @@
         <input type="text" id="url" name="url" placeholder="https://lorem-ipsum.com" maxlength="255">
 
         <label for="hosting_provider_id">Hosting provider<span class="text-bronze">*</span></label>
-        <select type="hosting_provider_id" id="hosting_provider_id" name="hosting_provider_id"
-            placeholder="Hosting Provider" maxlength="255">
+        <select id="hosting_provider_id" name="hosting_provider_id" placeholder="Hosting Provider" maxlength="255">
             <option value="" selected disabled>
                 - Kies een Hosting provider -
             </option>
@@ -32,8 +31,7 @@
         </select>
 
         <label for="product_owner_contact_id">Product Owner<span class="text-bronze">*</span></label>
-        <select type="product_owner_contact_id" id="product_owner_contact_id" name="product_owner_contact_id"
-            placeholder="Product Owner">
+        <select id="product_owner_contact_id" name="product_owner_contact_id" placeholder="Product Owner">
             <option value="" selected disabled>
                 - Kies een Product Owner -
             </option>
@@ -45,8 +43,7 @@
         </select>
 
         <label for="developer_contact_id">Developer<span class="text-bronze">*</span></label>
-        <select type="developer_contact_id" id="developer_contact_id" name="developer_contact_id"
-            placeholder="Developer" maxlength="255">
+        <select id="developer_contact_id" name="developer_contact_id" placeholder="Developer" maxlength="255">
             <option value="" selected disabled>
                 - Kies een Developer -
             </option>
@@ -58,14 +55,23 @@
         </select>
 
         <label for="project_manager_contact_id">Project manager<span class="text-bronze">*</span></label>
-        <select type="project_manager_contact_id" id="project_manager_contact_id" name="project_manager_contact_id"
-            placeholder="Project manager" maxlength="255">
+        <select id="project_manager_contact_id" name="project_manager_contact_id" placeholder="Project manager"
+            maxlength="255">
             <option value="" selected disabled>
                 - Kies een Project manager -
             </option>
             @foreach ($project_manager_contacts as $contact)
                 <option value="{{ $contact->id }}">
                     {{ $contact->name }}
+                </option>
+            @endforeach
+        </select>
+
+        <label for="site_tags">Tag(s)</label>
+        <select id="tags" name="tags[]" multiple>
+            @foreach ($tags as $tag)
+                <option value="{{ $tag->id }}">
+                    {{ $tag->label }}
                 </option>
             @endforeach
         </select>

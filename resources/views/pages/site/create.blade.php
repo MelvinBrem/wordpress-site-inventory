@@ -8,7 +8,7 @@
         <div class="container max-w-150 mx-auto bg-paper p-4 border-stone border-3d">
             <h1 class="h1 mb-4 text-center w-full">Site aanmaken</h1>
 
-            @include('components.form-site-create')
+            @include('components.forms.form-create-site')
 
         </div>
     </section>

@@ -16,7 +16,7 @@ class HostingProviderController extends Controller
     {
         $hosting_providers = HostingProvider::with('contact')->latest()->get();
 
-        return view('pages.hosting-provider-archive', [
+        return view('pages.hosting-provider.archive', [
             'hosting_providers' => $hosting_providers,
         ]);
     }
@@ -28,7 +28,7 @@ class HostingProviderController extends Controller
     {
         $contacts = Contact::orderBy('name')->get();
 
-        return view('pages.hosting-provider-create', [
+        return view('pages.hosting-provider.create', [
             'contacts' => $contacts,
         ]);
     }

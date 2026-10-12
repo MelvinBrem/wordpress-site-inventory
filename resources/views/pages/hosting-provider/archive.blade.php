@@ -9,13 +9,13 @@
                 <h1 class="h2">
                     Overzicht van alle hosting providers
                 </h1>
-                <a href="/create-hosting-provider" class="button ml-auto">
-                    Hosting provider toevoegen
+                <a href="/hosting-providers/create" class="button ml-auto">
+                    Hosting provider aanmaken
                 </a>
             </div>
 
             <div class="overflow-x-auto">
-                @include('components.table-hosting-providers', [
+                @include('components.tables.table-hosting-providers', [
                     'preview' => 'false',
                 ])
             </div>

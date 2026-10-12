@@ -10,7 +10,7 @@
                     <th>Developer</th>
                     <th>Project Manager</th>
                     <th>Product Owner</th>
-                    <th>Tags</th>
+                    <th>Tag(s)</th>
                     <th>Actions</th>
                 @else
                     <th>...</th>
@@ -38,15 +38,20 @@
                             </div>
                         </td>
                         <td class="flex flex-col flex-wrap gap-x-2">
-                            <a href="/site/{{ $site->id }}">
+                            <a href="/sites/{{ $site->id }}">
                                 Bekijken
                             </a>
-                            <a href="/site/{{ $site->id }}/update">
+                            <a href="/sites/{{ $site->id }}/edit">
                                 Aanpassen
                             </a>
-                            <a href="/site/{{ $site->id }}/delete">
-                                Verwijderen
-                            </a>
+                            <form action="/sites/{{ $site->id }}/destroy" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    onclick="return confirm('Weet je zeker dat je deze site wilt verwijderen?')">
+                                    Verwijderen
+                                </button>
+                            </form>
                         </td>
                     @else
                         <td>...</td>

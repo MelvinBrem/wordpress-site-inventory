@@ -9,14 +9,14 @@
                 <h1 class="h2">
                     Overzicht van alle sites
                 </h1>
-                <a href="/create-site" class="button ml-auto">
-                    Site toevoegen
+                <a href="/sites/create" class="button ml-auto">
+                    Site aanmaken
                 </a>
             </div>
 
             <div class="overflow-x-auto">
 
-                @include('components.table-sites', [
+                @include('components.tables.table-sites', [
                     'preview' => 'false',
                 ])
 

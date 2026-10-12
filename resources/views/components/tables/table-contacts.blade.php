@@ -8,7 +8,7 @@
                 @if ($preview !== 'true')
                     <th>Phone</th>
                     <th>Address</th>
-                    <th>Types</th>
+                    <th>Type(s)</th>
                     <th>Actions</th>
                 @else
                     <th>...</th>

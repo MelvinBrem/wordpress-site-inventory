@@ -11,14 +11,14 @@
                         <h1 class="h2">
                             {{ $title ?? 'Overzicht van contactpersonen' }}
                         </h1>
-                        <a href="/create-contact" class="button ml-auto">
-                            Contactpersoon toevoegen
+                        <a href="/contacts/create" class="button ml-auto">
+                            Contactpersoon aanmaken
                         </a>
                     </div>
 
                     <div class="overflow-x-auto">
 
-                        @include('components.table-contacts', [
+                        @include('components.tables.table-contacts', [
                             'title' => 'Overzicht van alle contactpersonen',
                             'preview' => 'false',
                         ])

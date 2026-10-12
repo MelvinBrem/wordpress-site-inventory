@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'Contacpersoon aanmaken | ' . config('app.name'))
+@section('title', 'Site aanpassen | ' . config('app.name'))
 
 @section('content')
 
     <section class="section">
         <div class="container max-w-150 mx-auto bg-paper p-4 border-stone border-3d">
-            <h1 class="h1 mb-4 text-center w-full">Contactpersoon aanmaken</h1>
+            <h1 class="h1 mb-4 text-center w-full">Site aanpassen</h1>
 
-            @include('components.form-contact-create')
+            @include('components.forms.form-edit-site')
 
         </div>
     </section>

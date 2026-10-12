@@ -17,7 +17,7 @@ class ContactController extends Controller
     {
         $contacts = Contact::latest()->get();
 
-        return view('pages.contact-archive', [
+        return view('pages.contact.archive', [
             'contacts' => $contacts
         ]);
     }
@@ -27,7 +27,7 @@ class ContactController extends Controller
      */
     public function create()
     {
-        return view('pages.contact-create', []);
+        return view('pages.contact.create', []);
     }
 
     /**

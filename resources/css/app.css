@@ -28,12 +28,14 @@
 
 /* Typography */
 
-a {
+a,
+button {
     @apply underline;
 }
 
-a:hover {
-    @apply no-underline;
+a:hover,
+button:hover {
+    @apply no-underline cursor-pointer;
 }
 
 h1,
@@ -81,6 +83,10 @@ input,
 select,
 textarea {
     @apply bg-silver p-1 w-full min-w-0;
+}
+
+select option[selected] {
+    background-color: var(--color-sand);
 }
 
 input::placeholder {
