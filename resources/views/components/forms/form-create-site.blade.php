@@ -30,9 +30,9 @@
             @endforeach
         </select>
 
-        <label for="product_owner_contact_id">Product Owner<span class="text-bronze">*</span></label>
+        <label for="product_owner_contact_id">Product Owner</label>
         <select id="product_owner_contact_id" name="product_owner_contact_id" placeholder="Product Owner">
-            <option value="" selected disabled>
+            <option value="">
                 - Kies een Product Owner -
             </option>
             @foreach ($product_owner_contacts as $contact)
@@ -42,9 +42,9 @@
             @endforeach
         </select>
 
-        <label for="developer_contact_id">Developer<span class="text-bronze">*</span></label>
+        <label for="developer_contact_id">Developer</label>
         <select id="developer_contact_id" name="developer_contact_id" placeholder="Developer" maxlength="255">
-            <option value="" selected disabled>
+            <option value="">
                 - Kies een Developer -
             </option>
             @foreach ($developer_contacts as $contact)
@@ -54,10 +54,10 @@
             @endforeach
         </select>
 
-        <label for="project_manager_contact_id">Project manager<span class="text-bronze">*</span></label>
+        <label for="project_manager_contact_id">Project manager</label>
         <select id="project_manager_contact_id" name="project_manager_contact_id" placeholder="Project manager"
             maxlength="255">
-            <option value="" selected disabled>
+            <option value="">
                 - Kies een Project manager -
             </option>
             @foreach ($project_manager_contacts as $contact)

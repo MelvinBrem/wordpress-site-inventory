@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('sites', function (Blueprint $table) {
             $table->id();
             $table->foreignId('hosting_provider_id')->nullable()->constrained();
-            $table->foreignId('developer_contact_id')->nullable()->constrained('contacts');
-            $table->foreignId('project_manager_contact_id')->nullable()->constrained('contacts');
-            $table->foreignId('product_owner_contact_id')->nullable()->constrained('contacts');
+            $table->foreignId('developer_contact_id')->nullable()->constrained('contacts')->nullOnDelete();
+            $table->foreignId('project_manager_contact_id')->nullable()->constrained('contacts')->nullOnDelete();
+            $table->foreignId('product_owner_contact_id')->nullable()->constrained('contacts')->nullOnDelete();
             $table->string('label');
             $table->string('url');
             $table->longText('notes')->nullable();

@@ -97,8 +97,10 @@ class HostingProviderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(HostingProvider $hosting_provider)
     {
-        //
+        $hosting_provider->delete();
+
+        return redirect('/hosting-providers')->with('message', 'Hosting provider verwijderd');
     }
 }

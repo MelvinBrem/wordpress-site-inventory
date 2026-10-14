@@ -44,9 +44,14 @@
                             <a href="/contacts/{{ $contact->id }}/edit">
                                 Aanpassen
                             </a>
-                            <a href="/contact/{{ $contact->id }}/delete">
-                                Verwijderen
-                            </a>
+                            <form action="/contacts/{{ $contact->id }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    onclick="return confirm('Weet je zeker dat je deze contactpersoon wilt verwijderen?')">
+                                    Verwijderen
+                                </button>
+                            </form>
                         </td>
                     @else
                         <td>...</td>

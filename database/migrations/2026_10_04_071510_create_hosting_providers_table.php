@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('hosting_providers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('contact_id')->nullable()->constrained();
+            $table->foreignId('contact_id')->nullable()->constrained()->nullOnDelete();
             $table->string('label');
             $table->string('url')->nullable();
             $table->timestamps();

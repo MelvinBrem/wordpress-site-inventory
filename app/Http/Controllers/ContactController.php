@@ -70,9 +70,7 @@ class ContactController extends Controller
      */
     public function edit(Contact $contact)
     {
-        return view('pages.contact.edit', [
-            'contact' => $contact,
-        ]);
+        return view('pages.contact.edit', compact('contact'));
     }
 
     /**
@@ -105,8 +103,10 @@ class ContactController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Contact $contact)
     {
-        //
+        $contact->delete();
+
+        return redirect('/contacts')->with('message', 'Contactpersoon verwijderd');
     }
 }

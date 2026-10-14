@@ -41,6 +41,6 @@
         <p class="text-sm text-gray-500">
             * verplicht veld
         </p>
-        <button class="button ml-auto" type="submit">Site aanmaken</button>
+        <button class="button ml-auto" type="submit">Contactpersoon aanmaken</button>
     </div>
 </form>

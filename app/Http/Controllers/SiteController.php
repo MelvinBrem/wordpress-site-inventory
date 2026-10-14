@@ -55,9 +55,9 @@ class SiteController extends Controller
                 'url'                           => 'required|url',
                 'notes'                         => 'nullable|string',
                 'hosting_provider_id'           => 'required|exists:hosting_providers,id',
-                'developer_contact_id'          => 'required|exists:contacts,id',
-                'project_manager_contact_id'    => 'required|exists:contacts,id',
-                'product_owner_contact_id'      => 'required|exists:contacts,id',
+                'developer_contact_id'          => 'nullable|exists:contacts,id',
+                'project_manager_contact_id'    => 'nullable|exists:contacts,id',
+                'product_owner_contact_id'      => 'nullable|exists:contacts,id',
                 'tags'                          => 'nullable|array',
                 'tags.*'                        => 'integer|exists:tags,id'
             ],
@@ -67,11 +67,8 @@ class SiteController extends Controller
                 'url.url'                               => 'De URL moet een geldige URL zijn.',
                 'hosting_provider_id.required'          => 'De site moet een hosting provider hebben.',
                 'hosting_provider_id.exists'            => 'De hosting provider bestaat niet.',
-                'developer_contact_id.required'         => 'De site moet een Developer hebben.',
                 'developer_contact_id.exists'           => 'De Developer bestaat niet.',
-                'project_manager_contact_id.required'   => 'De site moet een Projectmanager hebben.',
                 'project_manager_contact_id.exists'     => 'De Projectmanager bestaat niet.',
-                'product_owner_contact_id.required'     => 'De site moet een Product owner hebben.',
                 'product_owner_contact_id.exists'       => 'De Product owner bestaat niet.',
                 'tags.*.exists'                         => 'Één of meerdere van de geselecteerde tags bestaat niet (meer).'
             ]
@@ -82,9 +79,9 @@ class SiteController extends Controller
             'url'                           => $validated['url'],
             'notes'                         => $validated['notes'],
             'hosting_provider_id'           => $validated['hosting_provider_id'],
-            'developer_contact_id'          => $validated['developer_contact_id'],
-            'project_manager_contact_id'    => $validated['project_manager_contact_id'],
-            'product_owner_contact_id'      => $validated['product_owner_contact_id'],
+            'developer_contact_id'          => $validated['developer_contact_id'] ?? null,
+            'project_manager_contact_id'    => $validated['project_manager_contact_id'] ?? null,
+            'product_owner_contact_id'      => $validated['product_owner_contact_id'] ?? null,
         ]);
 
         $site->tags()->attach($validated['tags'] ?? []);
@@ -132,9 +129,9 @@ class SiteController extends Controller
                 'url'                           => 'required|url',
                 'notes'                         => 'nullable|string',
                 'hosting_provider_id'           => 'required|exists:hosting_providers,id',
-                'developer_contact_id'          => 'required|exists:contacts,id',
-                'project_manager_contact_id'    => 'required|exists:contacts,id',
-                'product_owner_contact_id'      => 'required|exists:contacts,id',
+                'developer_contact_id'          => 'nullable|exists:contacts,id',
+                'project_manager_contact_id'    => 'nullable|exists:contacts,id',
+                'product_owner_contact_id'      => 'nullable|exists:contacts,id',
                 'tags'                          => 'nullable|array',
                 'tags.*'                        => 'integer|exists:tags,id'
             ],
@@ -144,17 +141,19 @@ class SiteController extends Controller
                 'url.url'                               => 'De URL moet een geldige URL zijn.',
                 'hosting_provider_id.required'          => 'De site moet een hosting provider hebben.',
                 'hosting_provider_id.exists'            => 'De hosting provider bestaat niet.',
-                'developer_contact_id.required'         => 'De site moet een Developer hebben.',
                 'developer_contact_id.exists'           => 'De Developer bestaat niet.',
-                'project_manager_contact_id.required'   => 'De site moet een Projectmanager hebben.',
                 'project_manager_contact_id.exists'     => 'De Projectmanager bestaat niet.',
-                'product_owner_contact_id.required'     => 'De site moet een Product owner hebben.',
                 'product_owner_contact_id.exists'       => 'De Product owner bestaat niet.',
                 'tags.*.exists'                         => 'Één of meerdere van de geselecteerde tags bestaat niet (meer).'
             ]
         );
 
-        $site->update($validated);
+        $site->update([
+            ...$validated,
+            'developer_contact_id'          => $validated['developer_contact_id'] ?? null,
+            'project_manager_contact_id'    => $validated['project_manager_contact_id'] ?? null,
+            'product_owner_contact_id'      => $validated['product_owner_contact_id'] ?? null,
+        ]);
         $site->tags()->sync($validated['tags'] ?? []);
 
         return redirect('/sites/' . $site->id . '/edit')->with('message', 'Site aangepast');
@@ -163,8 +162,10 @@ class SiteController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Site $site)
     {
-        //
+        $site->delete();
+
+        return redirect('/sites')->with('message', 'Site verwijderd');
     }
 }

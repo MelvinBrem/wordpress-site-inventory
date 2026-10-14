@@ -22,7 +22,7 @@
                                 target="_blank">{{ $hosting_provider->url }}</a>
                         @endif
                     </td>
-                    <td>{{ $hosting_provider->contact?->name }}</td>
+                    <td>{{ $hosting_provider->contact ? $hosting_provider->contact->name : '-' }}</td>
                     @if ($preview !== 'true')
                         <td class="flex flex-col flex-wrap gap-x-2 w-fit">
                             <a href="/hosting-provider/{{ $hosting_provider->id }}">
@@ -31,9 +31,14 @@
                             <a href="/hosting-providers/{{ $hosting_provider->id }}/edit">
                                 Aanpassen
                             </a>
-                            <a href="/hosting-provider/{{ $hosting_provider->id }}/delete">
-                                Verwijderen
-                            </a>
+                            <form action="/hosting-providers/{{ $hosting_provider->id }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    onclick="return confirm('Weet je zeker dat je deze hosting provider wilt verwijderen?')">
+                                    Verwijderen
+                                </button>
+                            </form>
                         </td>
                     @else
                         <td>...</td>

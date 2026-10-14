@@ -27,9 +27,9 @@
                     <td>{{ $site->hostingProvider->label }}</td>
 
                     @if ($preview !== 'true')
-                        <td>{{ $site->developer->name }}</td>
-                        <td>{{ $site->projectManager->name }}</td>
-                        <td>{{ $site->productOwner->name }}</td>
+                        <td>{{ $site->developer ? $site->developer->name : '-' }}</td>
+                        <td>{{ $site->projectManager ? $site->projectManager->name : '-' }}</td>
+                        <td>{{ $site->productOwner ? $site->productOwner->name : '-' }}</td>
                         <td>
                             <div class="flex flex-wrap gap-2">
                                 @foreach ($site->tags as $tag)
@@ -44,7 +44,7 @@
                             <a href="/sites/{{ $site->id }}/edit">
                                 Aanpassen
                             </a>
-                            <form action="/sites/{{ $site->id }}/destroy" method="POST">
+                            <form action="/sites/{{ $site->id }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
