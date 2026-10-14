@@ -64,17 +64,34 @@ class HostingProviderController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(HostingProvider $hosting_provider)
     {
-        //
+        $contacts = Contact::orderBy('name')->get();
+
+        return view('pages.hosting-provider.edit', [
+            'hosting_provider' => $hosting_provider,
+            'contacts' => $contacts,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, HostingProvider $hosting_provider)
     {
-        //
+        $validated = $request->validate([
+            'label' => 'required|string|max:255',
+            'url' => 'nullable|string|max:255',
+            'contact_id' => 'nullable|exists:contacts,id',
+        ]);
+
+        $hosting_provider->update([
+            'label' => $validated['label'],
+            'url' => $validated['url'] ?? null,
+            'contact_id' => $validated['contact_id'] ?? null,
+        ]);
+
+        return redirect('/hosting-providers/' . $hosting_provider->id . '/edit')->with('message', 'Hosting provider aangepast');
     }
 
     /**

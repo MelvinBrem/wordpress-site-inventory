@@ -16,19 +16,19 @@
             @foreach ($hosting_providers as $hosting_provider)
                 <tr>
                     <td>{{ $hosting_provider->label }}</td>
-                            <td>
-                                @if ($hosting_provider->url)
-                                    <a href="{{ str($hosting_provider->url)->is('http*') ? $hosting_provider->url : 'https://' . $hosting_provider->url }}"
-                                        target="_blank">{{ $hosting_provider->url }}</a>
-                                @endif
-                            </td>
+                    <td>
+                        @if ($hosting_provider->url)
+                            <a href="{{ str($hosting_provider->url)->is('http*') ? $hosting_provider->url : 'https://' . $hosting_provider->url }}"
+                                target="_blank">{{ $hosting_provider->url }}</a>
+                        @endif
+                    </td>
                     <td>{{ $hosting_provider->contact?->name }}</td>
                     @if ($preview !== 'true')
-                        <td class="flex flex-col flex-wrap gap-x-2">
+                        <td class="flex flex-col flex-wrap gap-x-2 w-fit">
                             <a href="/hosting-provider/{{ $hosting_provider->id }}">
                                 Bekijken
                             </a>
-                            <a href="/hosting-provider/{{ $hosting_provider->id }}/update">
+                            <a href="/hosting-providers/{{ $hosting_provider->id }}/edit">
                                 Aanpassen
                             </a>
                             <a href="/hosting-provider/{{ $hosting_provider->id }}/delete">

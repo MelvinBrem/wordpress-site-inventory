@@ -20,7 +20,11 @@ Route::delete('/sites/{site}', [SiteController::class, 'destroy']);
 Route::get('/contacts', [ContactController::class, 'index']);
 Route::post('/contacts/create', [ContactController::class, 'store']);
 Route::get('/contacts/create', [ContactController::class, 'create']);
+Route::get('/contacts/{contact}/edit', [ContactController::class, 'edit']);
+Route::put('/contacts/{contact}/edit', [ContactController::class, 'update']);
 
 Route::get('/hosting-providers', [HostingProviderController::class, 'index']);
 Route::post('/hosting-providers/create', [HostingProviderController::class, 'store']);
 Route::get('/hosting-providers/create', [HostingProviderController::class, 'create']);
+Route::get('/hosting-providers/{hosting_provider}/edit', [HostingProviderController::class, 'edit']);
+Route::put('/hosting-providers/{hosting_provider}/edit', [HostingProviderController::class, 'update']);

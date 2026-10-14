@@ -41,7 +41,7 @@
                             <a href="/contact/{{ $contact->id }}">
                                 Bekijken
                             </a>
-                            <a href="/contact/{{ $contact->id }}/update">
+                            <a href="/contacts/{{ $contact->id }}/edit">
                                 Aanpassen
                             </a>
                             <a href="/contact/{{ $contact->id }}/delete">
