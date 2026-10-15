@@ -38,7 +38,7 @@
                             </div>
                         </td>
                         <td class="flex flex-col flex-wrap gap-x-2">
-                            <a href="/contact/{{ $contact->id }}">
+                            <a href="/contacts/{{ $contact->id }}">
                                 Bekijken
                             </a>
                             <a href="/contacts/{{ $contact->id }}/edit">
@@ -63,9 +63,12 @@
 
     @if ($preview === 'true')
         <section class="section mt-4 border-t-2 border-silver pt-4">
-            <div class="container mx-auto">
+            <div class="container mx-auto flex flex-row justify-between">
                 <a href="/contacts" class="button">
                     Bekijk alle contactpersonen
+                </a>
+                <a href="/contacts/create" class="button">
+                    Contactpersoon aanmaken
                 </a>
             </div>
         </section>

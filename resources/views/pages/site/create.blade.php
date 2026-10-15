@@ -10,6 +10,9 @@
 
             @include('components.forms.form-create-site')
 
+            <div class="mt-4">
+                <a href="/sites">Terug naar overzicht</a>
+            </div>
         </div>
     </section>
 

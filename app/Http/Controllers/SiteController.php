@@ -92,9 +92,19 @@ class SiteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Site $site)
     {
-        //
+        $site->load([
+            'hostingProvider',
+            'developer',
+            'projectManager',
+            'productOwner',
+            'tags',
+        ]);
+
+        return view('pages.site.show', [
+            'site' => $site,
+        ]);
     }
 
     /**

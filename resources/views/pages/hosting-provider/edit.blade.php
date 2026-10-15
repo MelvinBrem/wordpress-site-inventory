@@ -10,6 +10,9 @@
 
             @include('components.forms.form-edit-hosting-provider')
 
+            <div class="mt-4">
+                <a href="/sites">Terug naar overzicht</a>
+            </div>
         </div>
     </section>
 

@@ -22,10 +22,17 @@
                                 target="_blank">{{ $hosting_provider->url }}</a>
                         @endif
                     </td>
-                    <td>{{ $hosting_provider->contact ? $hosting_provider->contact->name : '-' }}</td>
+                    <td>
+                        @if ($hosting_provider->contact)
+                            <a
+                                href="/contacts/{{ $hosting_provider->contact->id }}">{{ $hosting_provider->contact->name }}</a>
+                        @else
+                            -
+                        @endif
+                    </td>
                     @if ($preview !== 'true')
                         <td class="flex flex-col flex-wrap gap-x-2 w-fit">
-                            <a href="/hosting-provider/{{ $hosting_provider->id }}">
+                            <a href="/hosting-providers/{{ $hosting_provider->id }}">
                                 Bekijken
                             </a>
                             <a href="/hosting-providers/{{ $hosting_provider->id }}/edit">
@@ -50,9 +57,12 @@
 
     @if ($preview === 'true')
         <section class="section mt-4 pt-4 border-t-2 border-silver">
-            <div class="container mx-auto">
+            <div class="container mx-auto flex flex-row justify-between">
                 <a href="/hosting-providers" class="button">
                     Bekijk alle hosting providers
+                </a>
+                <a href="/hosting-providers/create" class="button">
+                    Hosting provider aanmaken
                 </a>
             </div>
         </section>

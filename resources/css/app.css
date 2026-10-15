@@ -107,6 +107,10 @@ table td {
     @apply p-2 text-left;
 }
 
+table.details td:first-child {
+    @apply w-0 font-bold whitespace-nowrap;
+}
+
 table > *:not(thead) > tr:nth-child(even) {
     @apply bg-paper;
 }

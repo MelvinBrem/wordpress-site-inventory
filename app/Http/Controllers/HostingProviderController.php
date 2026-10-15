@@ -56,9 +56,13 @@ class HostingProviderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(HostingProvider $hosting_provider)
     {
-        //
+        $hosting_provider->load('contact');
+
+        return view('pages.hosting-provider.show', [
+            'hosting_provider' => $hosting_provider,
+        ]);
     }
 
     /**
