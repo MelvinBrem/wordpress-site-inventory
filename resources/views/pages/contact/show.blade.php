@@ -51,7 +51,7 @@
                 </tbody>
             </table>
 
-            <div class="flex flex-row gap-2 mt-4">
+            <div class="flex flex-row gap-2 mt-4 pt-4 border-t border-silver">
                 <a href="/contacts">Terug naar overzicht</a>
                 <a href="/contacts/{{ $contact->id }}/edit" class="ml-auto">Aanpassen</a>
             </div>

@@ -9,7 +9,9 @@
                     <th>Phone</th>
                     <th>Address</th>
                     <th>Type(s)</th>
-                    <th>Actions</th>
+                    @auth
+                        <th>Acties</th>
+                    @endauth
                 @else
                     <th>...</th>
                 @endif
@@ -37,22 +39,24 @@
                                 @endforeach
                             </div>
                         </td>
-                        <td class="flex flex-col flex-wrap gap-x-2">
-                            <a href="/contacts/{{ $contact->id }}">
-                                Bekijken
-                            </a>
-                            <a href="/contacts/{{ $contact->id }}/edit">
-                                Aanpassen
-                            </a>
-                            <form action="/contacts/{{ $contact->id }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                    onclick="return confirm('Weet je zeker dat je deze contactpersoon wilt verwijderen?')">
-                                    Verwijderen
-                                </button>
-                            </form>
-                        </td>
+                        @auth
+                            <td class="flex flex-col flex-wrap gap-x-2">
+                                <a href="/contacts/{{ $contact->id }}">
+                                    Bekijken
+                                </a>
+                                <a href="/contacts/{{ $contact->id }}/edit">
+                                    Aanpassen
+                                </a>
+                                <form action="/contacts/{{ $contact->id }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        onclick="return confirm('Weet je zeker dat je deze contactpersoon wilt verwijderen?')">
+                                        Verwijderen
+                                    </button>
+                                </form>
+                            </td>
+                        @endauth
                     @else
                         <td>...</td>
                     @endif

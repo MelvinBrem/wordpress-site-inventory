@@ -7,7 +7,7 @@
         <div class="container mx-auto">
             <section class="section {{ $classes ?? '' }}">
                 <div class="container mx-auto bg-paper p-4 border-3d border-stone">
-                    <div class="flex items-center relative pb-4 mb-4 border-b-2 border-silver">
+                    <div class="flex items-center relative mb-4">
                         <h1 class="h2">
                             {{ $title ?? 'Overzicht van contactpersonen' }}
                         </h1>

@@ -10,7 +10,7 @@
 
             @include('components.forms.form-edit-site')
 
-            <div class="mt-4">
+            <div class="mt-4 pt-4 border-t border-silver">
                 <a href="/sites">Terug naar overzicht</a>
             </div>
         </div>

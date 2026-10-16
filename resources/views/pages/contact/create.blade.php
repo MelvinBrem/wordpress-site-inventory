@@ -10,6 +10,9 @@
 
             @include('components.forms.form-create-contact')
 
+            <div class="mt-4 pt-4 border-t border-silver">
+                <a href="/contacts">Terug naar overzicht</a>
+            </div>
         </div>
     </section>
 

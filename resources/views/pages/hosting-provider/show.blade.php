@@ -29,7 +29,8 @@
                         <td>Contactpersoon</td>
                         <td>
                             @if ($hosting_provider->contact)
-                                <a href="/contacts/{{ $hosting_provider->contact->id }}">{{ $hosting_provider->contact->name }}</a>
+                                <a
+                                    href="/contacts/{{ $hosting_provider->contact->id }}">{{ $hosting_provider->contact->name }}</a>
                             @else
                                 -
                             @endif
@@ -38,7 +39,7 @@
                 </tbody>
             </table>
 
-            <div class="flex flex-row gap-2 mt-4">
+            <div class="flex flex-row gap-2 mt-4 pt-4 border-t border-silver">
                 <a href="/hosting-providers">Terug naar overzicht</a>
                 <a href="/hosting-providers/{{ $hosting_provider->id }}/edit" class="ml-auto">Aanpassen</a>
             </div>

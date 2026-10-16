@@ -6,7 +6,9 @@
                 <th>URL</th>
                 <th>Contactpersoon</th>
                 @if ($preview !== 'true')
-                    <th>Actions</th>
+                    @auth
+                        <th>Acties</th>
+                    @endauth
                 @else
                     <th>...</th>
                 @endif
@@ -31,22 +33,24 @@
                         @endif
                     </td>
                     @if ($preview !== 'true')
-                        <td class="flex flex-col flex-wrap gap-x-2 w-fit">
-                            <a href="/hosting-providers/{{ $hosting_provider->id }}">
-                                Bekijken
-                            </a>
-                            <a href="/hosting-providers/{{ $hosting_provider->id }}/edit">
-                                Aanpassen
-                            </a>
-                            <form action="/hosting-providers/{{ $hosting_provider->id }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                    onclick="return confirm('Weet je zeker dat je deze hosting provider wilt verwijderen?')">
-                                    Verwijderen
-                                </button>
-                            </form>
-                        </td>
+                        @auth
+                            <td class="flex flex-col flex-wrap gap-x-2 w-fit">
+                                <a href="/hosting-providers/{{ $hosting_provider->id }}">
+                                    Bekijken
+                                </a>
+                                <a href="/hosting-providers/{{ $hosting_provider->id }}/edit">
+                                    Aanpassen
+                                </a>
+                                <form action="/hosting-providers/{{ $hosting_provider->id }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        onclick="return confirm('Weet je zeker dat je deze hosting provider wilt verwijderen?')">
+                                        Verwijderen
+                                    </button>
+                                </form>
+                            </td>
+                        @endauth
                     @else
                         <td>...</td>
                     @endif

@@ -24,7 +24,8 @@
                         <td>Hosting provider</td>
                         <td>
                             @if ($site->hostingProvider)
-                                <a href="/hosting-providers/{{ $site->hostingProvider->id }}">{{ $site->hostingProvider->label }}</a>
+                                <a
+                                    href="/hosting-providers/{{ $site->hostingProvider->id }}">{{ $site->hostingProvider->label }}</a>
                             @else
                                 -
                             @endif
@@ -77,7 +78,7 @@
                 </tbody>
             </table>
 
-            <div class="flex flex-row gap-2 mt-4">
+            <div class="flex flex-row gap-2 mt-4 pt-4 border-t border-silver">
                 <a href="/sites">Terug naar overzicht</a>
                 <a href="/sites/{{ $site->id }}/edit" class="ml-auto">Aanpassen</a>
             </div>

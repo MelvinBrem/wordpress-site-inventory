@@ -10,7 +10,9 @@
                 <th>Product Owner</th>
                 @if ($preview !== 'true')
                     <th>Tag(s)</th>
-                    <th>Actions</th>
+                    @auth
+                        <th>Acties</th>
+                    @endauth
                 @else
                     <th>...</th>
                 @endif
@@ -61,22 +63,24 @@
                                 @endforeach
                             </div>
                         </td>
-                        <td class="flex flex-col flex-wrap gap-x-2">
-                            <a href="/sites/{{ $site->id }}">
-                                Bekijken
-                            </a>
-                            <a href="/sites/{{ $site->id }}/edit">
-                                Aanpassen
-                            </a>
-                            <form action="/sites/{{ $site->id }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                    onclick="return confirm('Weet je zeker dat je deze site wilt verwijderen?')">
-                                    Verwijderen
-                                </button>
-                            </form>
-                        </td>
+                        @auth
+                            <td class="flex flex-col flex-wrap gap-x-2">
+                                <a href="/sites/{{ $site->id }}">
+                                    Bekijken
+                                </a>
+                                <a href="/sites/{{ $site->id }}/edit">
+                                    Aanpassen
+                                </a>
+                                <form action="/sites/{{ $site->id }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        onclick="return confirm('Weet je zeker dat je deze site wilt verwijderen?')">
+                                        Verwijderen
+                                    </button>
+                                </form>
+                            </td>
+                        @endauth
                     @else
                         <td>...</td>
                     @endif

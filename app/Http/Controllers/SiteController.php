@@ -152,7 +152,7 @@ class SiteController extends Controller
                 'hosting_provider_id.required'          => 'De site moet een hosting provider hebben.',
                 'hosting_provider_id.exists'            => 'De hosting provider bestaat niet.',
                 'developer_contact_id.exists'           => 'De Developer bestaat niet.',
-                'project_manager_contact_id.exists'     => 'De Projectmanager bestaat niet.',
+                'project_emanager_contact_id.exists'     => 'De Projectmanager bestaat niet.',
                 'product_owner_contact_id.exists'       => 'De Product owner bestaat niet.',
                 'tags.*.exists'                         => 'Één of meerdere van de geselecteerde tags bestaat niet (meer).'
             ]
